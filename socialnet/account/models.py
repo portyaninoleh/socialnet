@@ -83,3 +83,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email])
+
+    def __unicode__(self):
+        return '{0} {1}'.format(self.first_name, self.last_name)
