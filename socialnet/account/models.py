@@ -45,8 +45,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     Email and password are required. Other fields are optional.
     """
     email = models.EmailField(_('email address'), max_length=254, unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
                     'site.'))
@@ -71,12 +69,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         """
         Returns the first_name plus the last_name, with a space in between.
         """
-        full_name = '%s %s' % (self.first_name, self.last_name)
+        full_name = '%s %s' % ('first name', 'last name')
         return full_name.strip()
 
     def get_short_name(self):
         "Returns the short name for the user."
-        return self.first_name
+        return 'first name'
 
     def email_user(self, subject, message, from_email=None):
         """
@@ -85,4 +83,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email])
 
     def __unicode__(self):
-        return '{0} {1}'.format(self.first_name, self.last_name)
+        return self.email

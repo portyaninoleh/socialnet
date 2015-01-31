@@ -25,7 +25,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
+DOMAIN_NAME = 'localhost:8000'
 
 # Application definition
 
@@ -40,8 +40,15 @@ INSTALLED_APPS = (
     'account',
     'common',
     'socialapp',
+    'registration',
+    'djrill',
+    'profiles',
+    'django.contrib.formtools',
 )
 
+INSTALLED_APPS += (
+    'debug_toolbar',
+)
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,7 +56,18 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',)
 
 ROOT_URLCONF = 'socialnet.urls'
 
@@ -94,3 +112,21 @@ AUTH_USER_MODEL = 'account.User'
 TEMPLATE_DIRS = (
     '{0}/templates'.format(BASE_DIR),
 )
+
+
+# https://docs.djangoproject.com/en/1.6/ref/settings/
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value.
+
+#https://docs.djangoproject.com/en/1.6/ref/settings/#default-from-email
+DEFAULT_FROM_EMAIL = 'robot.socialnet@example.com'
+
+#https://github.com/brack3t/Djrill
+MANDRILL_API_KEY = "9lY6G-jlFEtJgEKXH0H0wg"
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+
+# https://docs.djangoproject.com/en/1.7/ref/settings/#login-url
+LOGIN_URL = '/account/login/'
+
+# https://docs.djangoproject.com/en/1.7/ref/settings/#login-redirect-url
+LOGIN_REDIRECT_URL = '/'
+

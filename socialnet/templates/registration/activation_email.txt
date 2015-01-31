@@ -1,0 +1,7 @@
+
+{{first_name}}, thank you for registering an account at {{ site.domain }}.
+To activate your registration, please use next code: {{activation_key}}
+
+***
+
+If you didn't register this account you can simply delete this email and we won't bother you again.
