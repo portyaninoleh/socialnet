@@ -139,7 +139,3 @@ class RegistrationActivationForm(forms.Form):
                 return self.cleaned_data['activation_key']
 
         raise forms.ValidationError(_('You enter the wrong code.'))
-
-    def clean(self):
-
-        return self.cleaned_data
